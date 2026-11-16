@@ -1,0 +1,9 @@
+{
+  "name": "contractor-invoice-match",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Contractor invoices matched to a property manager's job log, every figure traced to its invoice line or log cell, held back when a plain check fails.",
+  "scripts": { "test": "node --test" },
+  "license": "MIT"
+}

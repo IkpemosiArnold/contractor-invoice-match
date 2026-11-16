@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invoice Match</title>
+<meta name="description" content="Contractor invoices matched to a property manager's job log. Every figure points at its invoice line or log cell; plain code holds back what does not match.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfaf5">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1214">
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-none" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.2 2.2"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<main class="shell">
+  <div class="sheet-col">
+    <header class="top">
+      <p class="mark">Invoice Match <span class="tag">Sample data</span></p>
+      <h1>Invoices checked against the job log.</h1>
+      <p class="sub">Eleven invoices and one job log from three made-up London blocks. Plain code matches them and holds back what does not fit.</p>
+    </header>
+
+    <section class="reading" aria-labelledby="summary">
+      <p class="summary" id="summary" role="status"><span class="sum-main">Checking</span></p>
+      <button type="button" class="btn text why-btn" id="why-btn" aria-expanded="false" aria-controls="chain">What ready means</button>
+      <div class="why-text" id="chain" hidden>
+        <p>Ready means the invoice matches one job in the log, nothing has been invoiced against that job yet, the job is marked Completed, the flat is the same, the net and the hours are inside the quote, the lines add up, and VAT is only charged with a VAT number on the invoice.</p>
+        <p>Anything else is held back with the reason, the invoice words and the log cells. Nothing posts until a person approves it.</p>
+      </div>
+      <div id="groups" class="groups"></div>
+    </section>
+  </div>
+
+  <aside class="evidence-col" id="side" aria-live="polite"></aside>
+
+  <section class="tool" id="own-tool" aria-labelledby="own-h">
+    <h2 id="own-h">Try your own invoice</h2>
+    <p class="tool-sub">Paste the text of a contractor invoice. It is checked against the sample job log below, in this browser. The first line is read as the contractor.</p>
+    <label class="sr" for="own-in">Invoice text</label>
+    <textarea id="own-in" rows="10" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Kessingdale Plumbing &amp; Heating Ltd&#10;VAT reg no: GB 284 7731 06&#10;INVOICE INV-2310&#10;Date: 13 Nov 2026&#10;Your ref: J-1046&#10;Site: Flat 1, Haddon Mansions&#10;Labour, 2 hrs @ £55.00  £110.00&#10;Net  £110.00&#10;VAT @ 20%  £22.00&#10;Total due  £132.00"></textarea>
+    <div class="actions">
+      <button type="button" id="own-check" class="btn primary">Check it</button>
+      <button type="button" id="own-sample" class="btn text">Fill in an example</button>
+    </div>
+    <p id="own-error" class="error" role="alert" hidden></p>
+  </section>
+
+  <section class="tool" id="log-tool" aria-labelledby="log-h">
+    <h2 id="log-h">The sample job log</h2>
+    <p class="tool-sub">30 repair jobs as a CSV export. The blocks are residential, so the contractor's VAT is posted as part of the cost.</p>
+    <div class="actions top-actions">
+      <button type="button" id="vat-mode" class="btn text" aria-pressed="false">Post VAT separately instead</button>
+      <button type="button" id="export" class="btn text">Download approved entries</button>
+      <button type="button" id="reset" class="btn text">Reset sample</button>
+    </div>
+    <p id="export-note" class="tool-sub note" role="status" hidden></p>
+    <div class="grid-scroll big" id="log-grid"></div>
+  </section>
+
+  <footer class="foot" id="foot">
+    <p>For property management teams who match contractor invoices to repair jobs. Built by Arnold Ikpemosi Adeyemi. Made-up blocks, contractors, VAT numbers and jobs; nothing is posted or sent.</p>
+    <p><a href="https://ikpemosi.work">ikpemosi.work</a></p>
+  </footer>
+</main>
+<script type="module" src="app.js?v=4"></script>
+</body>
+</html>
